@@ -16,6 +16,9 @@ coverage](https://codecov.io/gh/LCBC-UiO/ggsegChen/branch/master/graph/badge.svg
 This package contains dataset for plotting the Chen thickness and areal
 cortical atlas ggseg and ggseg3d.
 
+Chen et al. (2013) PNAS, 110 (42) 17089-17094;
+[pubmed](href%7Bhttps://doi.org/10.1073/pnas.1308091110)
+
 ## Installation
 
 You can install the released version of ggsegChen from
