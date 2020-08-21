@@ -1,31 +1,49 @@
-brain_pals = list(
-  chenAr = c(
-    `posterolateral temporal` = "#fca500",
-    `superior temporal` = "#01f6f2",
-    `dorsolateral prefrontal` = "#f7c7b7",
-    `motor-premotor` = "#0600ff",
-    `superior parietal` = "#009d00",
-    `orbitofrontal` = "#ff46c6",
-    `occipital` = "#ff0400",
-    `anteromedial temporal` = "#660099",
-    `inferior parietal` = "#d3fd6d",
-    `pars opercularis,subcentral` = "#e2a4fe",
-    `dorsomedial frontal` = "#ffff00",
-    `precuneus` = "#9a1300"
-  ),
-  chenTh = c(
-    `temporal pole` = "#590089",
-    `dorsolateral prefrontal` = "#f7c7b7",
-    `motor-premotor-supplementary motor area` = "#0600ff",
-    `ventral frontal` = "#fc30ac",
-    `occipital` = "#ff0400",
-    `superior parietal` = "#009d00",
-    `medial temporal` = "#01f3f0",
-    `medial prefrontal` = "#ffff00",
-    `middle temporal` = "#dc9f00",
-    `perisylvian` = "#e6adf3",
-    `inferior parietal` = "#d3fd6d",
-    `ventromedial occipital` = "#7f0900"
-  )
-)
+# chenTh ----
+devtools::load_all("../../ggsegExtra/")
+devtools::load_all(".")
+
+chenTh <- ggsegExtra::make_ggseg3d_2_ggseg(chenTh_3d,
+                                       steps = 1:7,
+                                       smoothness = 8,
+                                       keep = 0.05,
+                                       output_dir = "~/Desktop/test/")
+
+
+ggseg(atlas=chenTh, show.legend = FALSE,
+      colour = "black", position="stacked",
+      mapping = aes(fill=region)) +
+  scale_fill_brain()
+
+
+usethis::use_data(chenTh,
+                  internal = FALSE,
+                  overwrite = TRUE,
+                  compress="xz")
+
+# chenAr ----
+
+chenAr <- ggsegExtra::make_ggseg3d_2_ggseg(chenAr_3d,
+                                           steps = 1:7,
+                                           smoothness = 8,
+                                           keep = 0.05,
+                                           output_dir = "~/Desktop/test/")
+
+ggseg(atlas=chenAr, show.legend = FALSE,
+      colour = "black", position="stacked",
+      mapping = aes(fill=region)) +
+  scale_fill_brain()
+
+
+usethis::use_data(chenAr,
+                  internal = FALSE,
+                  overwrite = TRUE,
+                  compress="xz")
+
+# palettes ----
+
+
+chenTh_pal <- make_palette_ggseg(chenTh_3d)
+chenAr_pal <- make_palette_ggseg(chenAr_3d)
+
+brain_pals = c(chenTh_pal, chenAr_pal)
 usethis::use_data(brain_pals, internal = TRUE, overwrite = TRUE)

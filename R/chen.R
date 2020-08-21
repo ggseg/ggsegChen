@@ -7,14 +7,14 @@
 #' @keywords datasets
 #' @family ggseg_atlases
 #'
-#' @references Chen et al. (2013) PNAS, 110 (42) 17089-17094; 
+#' @references Chen et al. (2013) PNAS, 110 (42) 17089-17094;
 #' (\href{https://doi.org/10.1073/pnas.1308091110 }{PubMed})
 #'
 #' @format A data.frame with 11341 observations and 11 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}
-#'   \item{area}{name of region}
+#'   \item{region}{name of region}
 #'   \item{hemi}{dummy name of the hemisphere}
 #'   \item{side}{which side to view (sagittal)}
 #'   \item{label}{label name from Freesurfer}
@@ -25,21 +25,21 @@
 #' data(chenTh)
 "chenTh"
 
-#' Genetic topography of brain area morphology
+#' Genetic topography of brain region morphology
 #'
 #' @docType data
 #' @name chenAr
 #' @keywords datasets
 #' @family ggseg_atlases
-#' 
-#' @references Chen et al. (2013) PNAS, 110 (42) 17089-17094; 
+#'
+#' @references Chen et al. (2013) PNAS, 110 (42) 17089-17094;
 #' (\href{https://doi.org/10.1073/pnas.1308091110 }{PubMed})
 #'
 #' @format A data.frame with 11341 observations and 11 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}
-#'   \item{area}{name of region}
+#'   \item{region}{name of region}
 #'   \item{hemi}{dummy name of the hemisphere}
 #'   \item{side}{which side to view (sagittal)}
 #'   \item{label}{label name from Freesurfer}
@@ -64,8 +64,8 @@
 #' #' @examples
 #' #' data(chenTh_3d)
 #' "chenTh_3d"
-#' 
-#' #' Genetic topography of brain area morphology
+#'
+#' #' Genetic topography of brain region morphology
 #' #'
 #' #' @docType data
 #' #' @name chenAr_3d

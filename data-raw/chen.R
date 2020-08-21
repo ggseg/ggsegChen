@@ -1,18 +1,19 @@
 library(tidyverse)
-library(ggseg)
+devtools::load_all("../../ggseg/")
 devtools::load_all(".")
 
-load("data-raw/polygon/geobrain_Chencth.Rda")
-chenTh <- geobrain_Chencth %>% 
+load("data-raw/geobrain_Chencth.Rda")
+chenTh <- geobrain_Chencth %>%
   mutate(label = paste(hemi, gsub(" ", "_", aparc), sep = "_"),
          hemi = case_when(hemi == "lh" ~ "left",
                           hemi == "rh" ~ "right"),
          side = ifelse(id %in% c(1:17, 2000:2009), "lateral", "medial"),
          aparc = ifelse(grepl("wall", aparc), NA, aparc),
-         atlas = "chenTh") %>% 
+         atlas = "chenTh") %>%
   rename(region = aparc,
-         cluster = aparc2) %>% 
-  select(-group, -meas, -piece) %>% 
+         cluster = aparc2,
+         subid = piece) %>%
+  select(-group, -meas) %>%
   mutate(
     long = long - min(long),
     lat = lat - min(lat),
@@ -26,49 +27,30 @@ minLat <- chenTh %>% filter(hemi=="right" & side == "lateral") %>% select(long) 
 diff <- minLat - minMed
 diff <- 4.25 # adjustment for nicer distances
 
-chenTh <- chenTh %>% 
+chenTh <- chenTh %>%
   mutate(long = ifelse(hemi=="right" & side == "lateral",
                        long + diff, long),
          long = ifelse(hemi=="right" & side == "medial",
                        long - diff, long))
 
-
-# chenTh$pos[1] <- list(x = 1)
-# for(i in 1:nrow(chenTh)){
-#   chenTh$pos[[i]] = list(
-#     stacked = list(
-#       x = list(breaks = c(1.7, 6.5), 
-#                labels = c("lateral", "medial")), 
-#       y = list(breaks = c(1,  4.5), 
-#                labels = c("left", "right")), labs = list(
-#                  y = "side", x = "hemisphere")), 
-#     dispersed = list(
-#       x = list(
-#         breaks = c(4, 13.5), 
-#         labels = c("left", "right")), 
-#       y = list(breaks = NULL, labels = ""), 
-#       labs = list(y = NULL, x = "hemisphere")))
-# }
 chenTh <- as_ggseg_atlas(chenTh)
-
-chenTh <- rename(chenTh, region = area)
 usethis::use_data(chenTh, internal = FALSE, overwrite = TRUE, compress = "xz")
 
 
 
 
 load("data-raw/geobrain_ChenArea.Rda")
-
-chenAr <- geobrain_ChenArea %>% 
+chenAr <- geobrain_ChenArea %>%
   mutate(label = paste(hemi, gsub(" ", "_", aparc), sep = "_"),
          hemi = case_when(hemi == "lh" ~ "left",
                           hemi == "rh" ~ "right"),
          side = ifelse(id %in% c(1:20, 2000:2020), "lateral", "medial"),
          aparc = ifelse(grepl("wall", aparc), NA, aparc),
-         atlas = "chenAr") %>% 
+         atlas = "chenAr") %>%
   rename(region = aparc,
-         cluster = aparc2) %>% 
-  select(-group, -meas, -piece, -`as.numeric(id)`) %>% 
+         cluster = aparc2,
+         subid = piece) %>%
+  select(-group, -meas, -`as.numeric(id)`) %>%
   mutate(
     long = long - min(long),
     lat = lat - min(lat),
@@ -82,32 +64,13 @@ minLat <- chenAr %>% filter(hemi=="right" & side == "lateral") %>% select(long) 
 diff <- minLat - minMed
 diff <- 4.25 # adjustment for nicer distances
 
-chenAr <- chenAr %>% 
+chenAr <- chenAr %>%
   mutate(long = ifelse(hemi=="right" & side == "lateral",
                        long + diff, long),
          long = ifelse(hemi=="right" & side == "medial",
                        long - diff, long))
 
-
-# chenAr$pos[1] <- list(x = 1)
-# for(i in 1:nrow(chenAr)){
-#   chenAr$pos[[i]] = list(
-#     stacked = list(
-#       x = list(breaks = c(1.7, 6.5), 
-#                labels = c("lateral", "medial")), 
-#       y = list(breaks = c(1,  4.5), 
-#                labels = c("left", "right")), labs = list(
-#                  y = "side", x = "hemisphere")), 
-#     dispersed = list(
-#       x = list(
-#         breaks = c(4, 13.5), 
-#         labels = c("left", "right")), 
-#       y = list(breaks = NULL, labels = ""), 
-#       labs = list(y = NULL, x = "hemisphere")))
-# }
 chenAr <- as_ggseg_atlas(chenAr)
-
-chenAr <- rename(chenAr, region = area)
 usethis::use_data(chenAr, internal = FALSE, overwrite = TRUE, compress = "xz")
 
 
@@ -115,26 +78,26 @@ usethis::use_data(chenAr, internal = FALSE, overwrite = TRUE, compress = "xz")
 ### 3d atlases ####
 
 folder = "data-raw/mesh3d/chen_area/"
-mesh = lapply(list.files(folder, pattern="ply", full.names = T, recursive = T), 
+mesh = lapply(list.files(folder, pattern="ply", full.names = T, recursive = T),
               geomorph::read.ply, ShowSpecimen = F)
 
-annots = read_csv(paste0(folder, "annot2filename.csv")) %>% 
-separate(filename, into=c(NA, NA, "roi"), sep="[.]") %>% 
- select(-cluster) %>% 
+annots = read_csv(paste0(folder, "annot2filename.csv")) %>%
+separate(filename, into=c(NA, NA, "roi"), sep="[.]") %>%
+ select(-cluster) %>%
   left_join(chenAr %>% unnest(ggseg) %>%
-              mutate(annot = as.integer(.cluster)) %>%  
-              select(region, hemi, label, annot) %>% 
-              distinct()) %>% 
-  left_join(as.data.frame(as.list(brain_pals$chenAr)) %>% 
-              gather(region, colour) %>% 
+              mutate(annot = as.integer(.cluster)) %>%
+              select(region, hemi, label, annot) %>%
+              distinct()) %>%
+  left_join(as.data.frame(as.list(brain_pals$chenAr)) %>%
+              gather(region, colour) %>%
               mutate(region = gsub("[.]", " ", region),
                      region = gsub("motor premotor", "motor-premotor", region)))
 
 
 ff <- tibble(files = list.files(folder, pattern="ply", full.names = F, recursive = T),
-             atlas = "chenAr_3d") %>% 
-  filter(!grepl("gclust", files)) %>% 
-  separate(files, sep="[.]", into=c(NA, NA, "roi"), remove = F) %>% 
+             atlas = "chenAr_3d") %>%
+  filter(!grepl("gclust", files)) %>%
+  separate(files, sep="[.]", into=c(NA, NA, "roi"), remove = F) %>%
   mutate(surf = case_when(
     grepl("inflated", files) ~ "inflated",
     grepl("white", files) ~ "white",
@@ -142,8 +105,8 @@ ff <- tibble(files = list.files(folder, pattern="ply", full.names = F, recursive
     hemi = case_when(
       grepl("lh", files) ~ "left",
       grepl("rh", files) ~ "right")
-  ) %>% 
-  left_join(annots) 
+  ) %>%
+  left_join(annots)
 
 
 ff$mesh = list(vb=1)
@@ -169,26 +132,26 @@ usethis::use_data(chenAr_3d, overwrite = TRUE, internal = FALSE, compress = "xz"
 
 
 folder = "data-raw/mesh3d/chen_thickness//"
-mesh = lapply(list.files(folder, pattern="ply", full.names = T, recursive = T), 
+mesh = lapply(list.files(folder, pattern="ply", full.names = T, recursive = T),
               geomorph::read.ply, ShowSpecimen = F)
 
-annots = read_csv(paste0(folder, "annot2filename.csv")) %>% 
-  separate(filename, into=c(NA, NA, "roi"), sep="[.]") %>% 
-  select(-cluster) %>% 
+annots = read_csv(paste0(folder, "annot2filename.csv")) %>%
+  separate(filename, into=c(NA, NA, "roi"), sep="[.]") %>%
+  select(-cluster) %>%
   left_join(chenTh %>% unnest(ggseg) %>%
-              mutate(annot = as.integer(.cluster)) %>%  
-              select(region, hemi, label, annot) %>% 
-              distinct()) %>% 
-  left_join(as.data.frame(as.list(brain_pals$chenTh)) %>% 
-              gather(region, colour) %>% 
+              mutate(annot = as.integer(.cluster)) %>%
+              select(region, hemi, label, annot) %>%
+              distinct()) %>%
+  left_join(as.data.frame(as.list(brain_pals$chenTh)) %>%
+              gather(region, colour) %>%
               mutate(region = gsub("[.]", " ", region),
                      region = gsub("motor premotor ", "motor-premotor-", region)))
 
 
 ff <- tibble(files = list.files(folder, pattern="ply", full.names = F, recursive = T),
-             atlas = "chenTh_3d") %>% 
-  filter(!grepl("gclust", files)) %>% 
-  separate(files, sep="[.]", into=c(NA, NA, "roi"), remove = F) %>% 
+             atlas = "chenTh_3d") %>%
+  filter(!grepl("gclust", files)) %>%
+  separate(files, sep="[.]", into=c(NA, NA, "roi"), remove = F) %>%
   mutate(surf = case_when(
     grepl("inflated", files) ~ "inflated",
     grepl("white", files) ~ "white",
@@ -196,8 +159,8 @@ ff <- tibble(files = list.files(folder, pattern="ply", full.names = F, recursive
     hemi = case_when(
       grepl("lh", files) ~ "left",
       grepl("rh", files) ~ "right")
-  ) %>% 
-  left_join(annots) 
+  ) %>%
+  left_join(annots)
 
 
 ff$mesh = list(vb=1)
