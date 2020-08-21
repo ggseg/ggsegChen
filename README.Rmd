@@ -21,6 +21,9 @@ devtools::load_all(".")
 [![Travis build status](https://travis-ci.org/LCBC-UiO/ggsegChen.svg?branch=master)](https://travis-ci.org/LCBC-UiO/ggsegChen)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggsegChen?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggsegChen)
 [![Codecov test coverage](https://codecov.io/gh/LCBC-UiO/ggsegChen/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggsegChen?branch=master)
+[![R build status](https://github.com/LCBC-UiO/ggsegChen/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggsegChen/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/ggsegChen)](https://CRAN.R-project.org/package=ggsegChen)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 This package contains dataset for plotting the Chen thickness and areal cortical atlas ggseg and ggseg3d. 
@@ -87,6 +90,6 @@ ggseg(atlas = chenTh, mapping = aes(fill = region)) +
 <!-- knitr::include_graphics("man/figures/README-3d-plot.png") -->
 <!-- ``` -->
 
-Please note that the 'ggsegDesterieux' project is released with a
+Please note that the 'ggsegChen' project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.

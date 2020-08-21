@@ -3,13 +3,13 @@
 \docType{data}
 \name{chenAr}
 \alias{chenAr}
-\title{Genetic topography of brain area morphology}
+\title{Genetic topography of brain region morphology}
 \format{
 A data.frame with 11341 observations and 11 variables
 \describe{
   \item{long}{coordinates for the x-axis}
   \item{lat}{coordinates for the y-axis}
-  \item{area}{name of region}
+  \item{region}{name of region}
   \item{hemi}{dummy name of the hemisphere}
   \item{side}{which side to view (sagittal)}
   \item{label}{label name from Freesurfer}
@@ -20,13 +20,13 @@ A data.frame with 11341 observations and 11 variables
 chenAr
 }
 \description{
-Genetic topography of brain area morphology
+Genetic topography of brain region morphology
 }
 \examples{
 data(chenAr)
 }
 \references{
-Chen et al. (2013) PNAS, 110 (42) 17089-17094; 
+Chen et al. (2013) PNAS, 110 (42) 17089-17094;
 (\href{https://doi.org/10.1073/pnas.1308091110 }{PubMed})
 }
 \seealso{

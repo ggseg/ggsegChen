@@ -13,7 +13,7 @@ Description: This is a support package for the ggseg, and ggseg3d packages.
     It contains the Chen atlases to plot using functions from those two packages.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
 LazyData: true
 Suggests:
