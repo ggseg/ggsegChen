@@ -46,8 +46,7 @@ library(ggsegChen)
 ``` r
 library(ggseg)
 
-ggseg(atlas = chenAr, mapping = aes(fill = region)) +
-  scale_fill_brain("chenAr", package = "ggsegChen") +
+plot(chenAr) +
   labs(title = "Chen areal (chenAr)") +
   theme(legend.position = "bottom",
         legend.text = element_text(size = 9)) +
@@ -57,8 +56,7 @@ ggseg(atlas = chenAr, mapping = aes(fill = region)) +
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ``` r
-ggseg(atlas = chenTh, mapping = aes(fill = region)) +
-  scale_fill_brain("chenTh", package = "ggsegChen") +
+plot(chenTh) +
   labs(title = "Chen thickness (chenTh)") +
   theme(legend.position = "bottom",
         legend.text = element_text(size = 9)) +

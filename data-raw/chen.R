@@ -34,6 +34,8 @@ chenTh <- chenTh %>%
                        long - diff, long))
 
 chenTh <- as_ggseg_atlas(chenTh)
+chenTh <- as_brain_atlas(chenTh)
+chenTh$palette <- brain_pals$chenTh
 usethis::use_data(chenTh, internal = FALSE, overwrite = TRUE, compress = "xz")
 
 
@@ -71,6 +73,8 @@ chenAr <- chenAr %>%
                        long - diff, long))
 
 chenAr <- as_ggseg_atlas(chenAr)
+chenAr <- as_brain_atlas(chenAr)
+chenAr$palette <- brain_pals$chenAr
 usethis::use_data(chenAr, internal = FALSE, overwrite = TRUE, compress = "xz")
 
 

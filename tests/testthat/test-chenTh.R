@@ -1,8 +1,4 @@
 # ggseg ----
-context("test-chenTh-adapt_scales")
-test_that("Check that ggseg:::adapt_scales is working", {
-  expect_equal(mode(ggseg:::adapt_scales(unnest(chenTh, ggseg))), "list")
-})
 
 context("test-chenTh-palettes")
 test_that("check new palettes work", {
@@ -10,13 +6,13 @@ test_that("check new palettes work", {
 
   expect_error(brain_pal("chenTh"), "not a valid")
 
-  expect_true(all(names(brain_pal("chenTh", package = "ggsegChen")) %in% chenTh$region))
+  expect_true(all(names(brain_pal("chenTh", package = "ggsegChen")) %in% brain_regions(chenTh)))
 })
 
 context("test-chenTh-ggseg-atlas")
 test_that("atlases are true ggseg atlases", {
-
-  expect_true(is_ggseg_atlas(chenTh))
+  expect_true(is_brain_atlas(chenTh))
+  expect_true(is_ggseg_atlas(as_ggseg_atlas(chenTh)))
 
 })
 

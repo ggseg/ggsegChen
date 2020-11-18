@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   fig.width = 6,
-  out.width = "100%"
+  out.width = "100%",
+  fig.retina = 3
 )
 devtools::load_all(".")
 ```
@@ -49,21 +50,18 @@ library(ggsegChen)
 ```{r}
 library(ggseg)
 
-ggseg(atlas = chenAr, mapping = aes(fill = region)) +
-  scale_fill_brain("chenAr", package = "ggsegChen") +
+plot(chenAr) +
   labs(title = "Chen areal (chenAr)") +
   theme(legend.position = "bottom",
         legend.text = element_text(size = 9)) +
   guides(fill = guide_legend(ncol = 3))
 ```
 ```{r fig.height = 6}
-ggseg(atlas = chenTh, mapping = aes(fill = region)) +
-  scale_fill_brain("chenTh", package = "ggsegChen") +
+plot(chenTh) +
   labs(title = "Chen thickness (chenTh)") +
   theme(legend.position = "bottom",
         legend.text = element_text(size = 9)) +
   guides(fill = guide_legend(ncol = 2))
-
 ```
 
 <!-- ```{r "noneval", eval=FALSE} -->
