@@ -45,6 +45,7 @@ library(ggsegChen)
 
 ``` r
 library(ggseg)
+#> Loading required package: ggplot2
 
 plot(chenAr) +
   labs(title = "Chen areal (chenAr)") +
