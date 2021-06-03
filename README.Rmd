@@ -15,11 +15,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggsegChen
+# ggsegChen <img src='man/figures/logo.png' align="right" height="138.5" />
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/LCBC-UiO/ggsegChen.svg?branch=master)](https://travis-ci.org/LCBC-UiO/ggsegChen)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggsegChen?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggsegChen)
+[![DOI](https://zenodo.org/badge/250277410.svg)](https://zenodo.org/badge/latestdoi/250277410)
 [![Codecov test coverage](https://codecov.io/gh/LCBC-UiO/ggsegChen/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggsegChen?branch=master)
 [![R build status](https://github.com/LCBC-UiO/ggsegChen/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggsegChen/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggsegChen)](https://CRAN.R-project.org/package=ggsegChen)
@@ -31,6 +30,18 @@ This package contains dataset for plotting the Chen thickness and areal cortical
 Chen et al. (2013) PNAS, 110 (42) 17089-17094; [pubmed](href{https://doi.org/10.1073/pnas.1308091110)
 
 ## Installation
+
+We recommend installing the ggseg-atlases through the ggseg [r-universe](https://ggseg.r-universe.dev/ui#builds):
+
+```{r eval = FALSE}
+# Enable this universe
+options(repos = c(
+    ggseg = 'https://ggseg.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'))
+
+# Install some packages
+install.packages('ggsegChen')
+```
 
 You can install the released version of ggsegChen from [GitHub](https://github.com/) with:
 
@@ -48,6 +59,7 @@ library(ggsegChen)
 
 ```{r}
 library(ggseg)
+library(ggplot2)
 
 plot(chenAr) +
   labs(title = "Chen areal (chenAr)") +
