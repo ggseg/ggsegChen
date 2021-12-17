@@ -1,9 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-06-03T12:46Z
+last_built: 2021-12-17T09:49Z
 urls:
-  reference: https://lcbc-uio.github.io/ggsegChen//reference
-  article: https://lcbc-uio.github.io/ggsegChen//articles
+  reference: https://lcbc-uio.github.io/ggsegChen/reference
+  article: https://lcbc-uio.github.io/ggsegChen/articles
 
