@@ -5,15 +5,9 @@
 
 <!-- badges: start -->
 
-[![DOI](https://zenodo.org/badge/250277410.svg)](https://zenodo.org/badge/latestdoi/250277410)
-[![Codecov test
-coverage](https://codecov.io/gh/LCBC-UiO/ggsegChen/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggsegChen?branch=master)
 [![R build
 status](https://github.com/LCBC-UiO/ggsegChen/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggsegChen/actions)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggsegChen)](https://CRAN.R-project.org/package=ggsegChen)
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![DOI](https://zenodo.org/badge/250277410.svg)](https://zenodo.org/badge/latestdoi/250277410)
 <!-- badges: end -->
 
 This package contains dataset for plotting the Chen thickness and areal
@@ -55,6 +49,8 @@ library(ggsegChen)
 
 ``` r
 library(ggseg)
+#> Warning: package 'ggseg' was built under R version 4.1.1
+#> Loading required package: ggplot2
 library(ggplot2)
 
 plot(chenAr) +
